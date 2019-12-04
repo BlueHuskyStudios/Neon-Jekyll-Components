@@ -1,7 +1,7 @@
 
 <nav class="sidebar   flex-column flex-vert-space-between">
     <section>
-        {%- unless include.emptyHeader -%}
+        {%- unless include.emptyHeader %}
         <header>
             <figure>
                 {%- if include.headerImage -%}
@@ -11,19 +11,33 @@
                 {%- endif -%}
             </figure>
         </header>
-        {%- endunless -%}
+        {%- endunless %}
+        {%- if site.sidebar.defaultLinks %}
+        {%- assign links=include.links | concat: site.sidebar.defaultLinks %}
+        {%- else %}
+        {%- assign links=include.links %}
+        {%- endif %}
+        {%- assign linksCount=links | size %}
+        {%- unless linksCount == 0 %}
         <ul>
-            {% for link in include.links %}
-            <li><a href="{{ link.url }}" class="button">{{ link.text }}</a></li>
-            {% endfor %}
+            {%- for link in links %}
+            <li><a href="{{ link.url }}" class="button">
+                {%- if link.materialIcon -%}
+                <i class="material-icons">{{ link.materialIcon }}</i>
+                {%- elsif link.fontAwesomeIcon -%}
+                <i class="{{ link.fontAwesomeIcon }}"></i>
+                {%- endif -%}
+                {{ link.text }}</a></li>
+            {%- endfor %}
         </ul>
+        {%- endunless %}
     </section>
 
-    {%- for sectionInclude in include.additionalSectionIncludes -%}
+    {%- for sectionInclude in include.additionalSectionIncludes %}
     <section>
         {% include {{ sectionInclude }} %}
     </section>
-    {%- endfor -%}
+    {%- endfor %}
 
     <section>
         <ul class="theme-color-selection-list">
