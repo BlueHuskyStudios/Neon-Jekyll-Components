@@ -4,10 +4,10 @@
         {%- unless include.emptyHeader %}
         <header>
             <figure>
-                {%- if include.headerImage -%}
-                <img src="{{ include.headerImage.url }}" class="{{ include.headerImage.htmlClassNames }}"/>
+                {%- if include.headerImage_url -%}
+                <img src="{{ include.headerImage_url }}" class="{{ include.headerImage_htmlClassNames }}"/>
                 {%- else -%}
-                No header image supplied; <code>emptyHeader</code> was not <code>true</code>
+                No header image supplied; <code>headerImage_url</code> was missing and <code>emptyHeader</code> was not <code>true</code>
                 {%- endif -%}
             </figure>
         </header>
