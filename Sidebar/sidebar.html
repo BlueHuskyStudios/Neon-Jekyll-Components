@@ -1,0 +1,55 @@
+
+<nav class="sidebar   flex-column flex-vert-space-between">
+    <section>
+        {%- unless include.emptyHeader %}
+        <header>
+            <figure>
+                {%- if include.headerImage_url -%}
+                <img src="{{ include.headerImage_url }}" class="{{ include.headerImage_htmlClassNames }}"/>
+                {%- else -%}
+                No header image supplied; <code>headerImage_url</code> was missing and <code>emptyHeader</code> was not <code>true</code>
+                {%- endif -%}
+            </figure>
+        </header>
+        {%- endunless %}
+        {%- if site.sidebar.defaultLinks %}
+        {%- assign links=include.links | concat: site.sidebar.defaultLinks %}
+        {%- else %}
+        {%- assign links=include.links %}
+        {%- endif %}
+        {%- assign linksCount=links | size %}
+        {%- unless linksCount == 0 %}
+        <ul>
+            {%- for link in links %}
+            <li><a href="{{ link.url }}" class="button">
+                {%- if link.materialIcon -%}
+                <i class="material-icons">{{ link.materialIcon }}</i>
+                {%- elsif link.fontAwesomeIcon -%}
+                <i class="{{ link.fontAwesomeIcon }}"></i>
+                {%- endif -%}
+                {{ link.text }}</a></li>
+            {%- endfor %}
+        </ul>
+        {%- endunless %}
+    </section>
+
+    {%- for sectionInclude in include.additionalSectionIncludes %}
+    <section>
+        {% include {{ sectionInclude }} %}
+    </section>
+    {%- endfor %}
+
+    <section>
+        <ul class="theme-color-selection-list">
+            <li><a href="#Brightness-Dark"  onclick="return false" title="Dark"  class="color-swatch" theme-swatch-type="brightness" theme-swatch-value="dark" >Dark</a></li>
+            <li><a href="#Brightness-Light" onclick="return false" title="Light" class="color-swatch" theme-swatch-type="brightness" theme-swatch-value="light">Light</a></li>
+        </ul>
+        <ul class="theme-color-selection-list">
+            <li><a href="#Theme-Water" onclick="return false" title="Water" class="color-swatch" theme-swatch-type="color" theme-swatch-value="water">Water</a></li>
+            <li><a href="#Theme-Earth" onclick="return false" title="Earth" class="color-swatch" theme-swatch-type="color" theme-swatch-value="earth">Earth</a></li>
+            <li><a href="#Theme-Fire"  onclick="return false" title="Fire"  class="color-swatch" theme-swatch-type="color" theme-swatch-value="fire" >Fire</a></li>
+            <li><a href="#Theme-Air"   onclick="return false" title="Air"   class="color-swatch" theme-swatch-type="color" theme-swatch-value="air"  >Air</a></li>
+       <!-- <li><a href="#Theme-Magic" onclick="return false" title="Magic" class="color-swatch" theme-swatch-type="color" theme-swatch-value="magic">Magic</a></li> -->
+        </ul>
+    </section>
+</nav>
