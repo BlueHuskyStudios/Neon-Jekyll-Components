@@ -22,13 +22,13 @@
         {%- unless linksCount == 0 %}
         <ul>
             {%- for link in links %}
-            <li><a href="{{ link.url }}" class="button">
+            <li><a href="{{ link.url }}" class="button image-button">
                 {%- if link.materialIcon -%}
                 <i class="material-icons">{{ link.materialIcon }}</i>
                 {%- elsif link.fontAwesomeIcon -%}
                 <i class="{{ link.fontAwesomeIcon }}"></i>
                 {%- endif -%}
-                {{ link.text }}</a></li>
+                <span>{{ link.text }}</span></a></li>
             {%- endfor %}
         </ul>
         {%- endunless %}
