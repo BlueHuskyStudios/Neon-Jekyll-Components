@@ -1,0 +1,8 @@
+
+{% include ./single-item-highlight-custom-start.html
+    raised=include.raised
+%}
+<a href="{{ include.full }}" target="_blank" class="thumbnail-full-image-link"><img src="{{ include.thumb | default: include.full }}" {%- if include.alt %} alt="{{ include.alt }}" {%- endif %} class="thumbnail" /></a>
+{% include ./single-item-highlight-custom-end.html
+    caption=include.caption
+%}
