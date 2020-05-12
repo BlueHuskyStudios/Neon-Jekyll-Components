@@ -1,13 +1,14 @@
 
 <nav class="sidebar   flex-column flex-vert-space-between">
     <section>
-        {%- unless include.emptyHeader %}
+        {%- unless include.emptyHeader | default: site.sidebar.emptyHeader %}
         <header>
             <figure>
-                {%- if include.headerImage_url -%}
-                <img src="{{ include.headerImage_url }}" class="{{ include.headerImage_htmlClassNames }}"/>
+                {%- assign headerImageUrl = include.headerImage_url | default: site.sidebar.headerImage.url %}
+                {%- if headerImageUrl -%}
+                <img src="{{ headerImageUrl }}" class="{{ include.headerImage_htmlClassNames | default: site.sidebar.headerImage.htmlClassNames }}"/>
                 {%- else -%}
-                No header image supplied; <code>headerImage_url</code> was missing and <code>emptyHeader</code> was not <code>true</code>
+                No header image supplied; <code>headerImage_url</code> and <code>site.sidebar.headerImage.url</code> were missing and <code>emptyHeader</code> nor <code>site.sidebar.emptyHeader</code> were not <code>true</code>
                 {%- endif -%}
             </figure>
         </header>
