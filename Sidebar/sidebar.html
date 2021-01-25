@@ -1,5 +1,5 @@
 
-<nav class="sidebar   flex-column flex-vert-space-between">
+<nav class="sidebar   flex-column flex-vert-space-between{%- if include.class %} {{ include.class }} {%- endif -%}">
     <section>
         {%- unless include.emptyHeader | default: site.sidebar.emptyHeader %}
         <header>
