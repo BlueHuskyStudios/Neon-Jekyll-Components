@@ -15,7 +15,11 @@
         {%- endunless %}
 
         {%- if site.sidebar.defaultLinks %}
-            {%- assign links=include.links | concat: site.sidebar.defaultLinks %}
+            {%- if include.links %}
+                {%- assign links=site.sidebar.defaultLinks | concat: include.links %}
+            {%- else -%}
+                {%- assign links=site.sidebar.defaultLinks %}
+            {%- endif -%}
         {%- else %}
             {%- assign links=include.links %}
         {%- endif %}
