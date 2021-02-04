@@ -6,7 +6,7 @@
             <figure>
                 {%- assign headerImageUrl = include.headerImage_url | default: site.sidebar.headerImage.url %}
                 {%- if headerImageUrl -%}
-                <img src="{{ headerImageUrl }}" class="{{ include.headerImage_htmlClassNames | default: site.sidebar.headerImage.htmlClassNames }}"/>
+                {% unless page.url == "/" -%} <a href="/"> {%- endunless %}<img src="{{ headerImageUrl }}" class="{{ include.headerImage_htmlClassNames | default: site.sidebar.headerImage.htmlClassNames }}"/></a>
                 {%- else -%}
                 No header image supplied; <code>headerImage_url</code> and <code>site.sidebar.headerImage.url</code> were missing and <code>emptyHeader</code> nor <code>site.sidebar.emptyHeader</code> were not <code>true</code>
                 {%- endif -%}
