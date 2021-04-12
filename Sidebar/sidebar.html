@@ -4,7 +4,7 @@
         {%- unless include.emptyHeader | default: site.sidebar.emptyHeader %}
         <header>
             <figure>
-                {%- assign headerImageUrl = include.headerImage_url | default: site.sidebar.headerImage.url %}
+                {%- assign headerImageUrl = include.headerImage_url | default: site.sidebar.headerImage.url | default: site.author.avatar %}
                 {%- if headerImageUrl -%}
                 {% unless page.url == "/" -%} <a href="/"> {%- endunless %}<img src="{{ headerImageUrl }}" class="{{ include.headerImage_htmlClassNames | default: site.sidebar.headerImage.htmlClassNames }}"/></a>
                 {%- else -%}

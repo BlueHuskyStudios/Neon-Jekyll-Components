@@ -117,9 +117,9 @@ sidebar:
     </td>
 </tr>
 <tr>
-    <td> _optional_ <hr/> 👇🏽 `headerImage_url` <br/> 🌐 `headerImage.url` </td><td> The URL to the image to display in the sidebar's header. If excluded, then `emptyHeader` must be specified.</td>
+    <td> _optional_ <hr/> 👇🏽 `headerImage_url` <br/> 🌐 `headerImage.url` </td><td> The URL to the image to display in the sidebar's header. If excluded, then `site.author.avatar` will be used. If that configuration isn't set, then `emptyHeader` must be specified.</td>
     <td>
-- Excluded or `false`: The header image is not displayed. If `emptyHeader` is not `true`, then an error message is displayed instead.
+- Excluded or `false`: The header image is the author's avatar, or is not displayed. If `emptyHeader` is not `true`, then an error message is displayed instead, to ensure that this is on-purpose.
 - Any string:          The URL to the header image
 
     </td>
