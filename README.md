@@ -134,6 +134,24 @@ sidebar:
     </td>
 </tr>
 <tr>
+    <td> _optional_ <hr/> 👇🏽🌐 `excludeHomepageLink` </td><td> Whether to exclude the homepage link from the sidebar. </td>
+    <td>
+
+- Excluded or `false`: The link will appear. When the user is on the homepage (`/`), this link still appears but is disabled
+- `true`:              The link is not displayed at all
+
+    </td>
+</tr>
+<tr>
+    <td> _optional_ <hr/> 👇🏽🌐 `excludeAboutLink` </td><td> Whether to exclude the about page link from the sidebar. The name of the about page is specified in the site config as `pages.about`; if that's not specified, it's assumed to be `about`, with the path `/about/`. </td>
+    <td>
+
+- Excluded or `false`: The link will appear. When the user is on the about (e.g. `/about/`), this link still appears but is disabled
+- `true`:              The link is not displayed at all
+
+    </td>
+</tr>
+<tr>
     <td> _optional_ <hr/> 👇🏽 `links` </td><td> Page-specific links to place in the sidebar </td>
     <td>
 

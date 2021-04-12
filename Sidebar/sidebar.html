@@ -14,6 +14,26 @@
         </header>
         {%- endunless %}
 
+        {% assign excludeHomepageLink = include.excludeHomepageLink | default: site.sidebar.excludeHomepageLink %}
+        {% assign excludeAboutLink = include.excludeAboutLink | default: site.sidebar.excludeAboutLink %}
+
+        {%- unless excludeHomepageLink and excludeAboutLink %}
+        <ul>
+            {%- unless excludeHomepageLink %}
+            <li><a {% if page.url == "/" -%} disabled {%- else -%} href="/" {%- endif %} class="button">{{ site.title }}</a></li>
+            {%- endunless %}
+
+            {%- unless excludeAboutLink %}
+            {%- assign thisPagePath = page.url | slice: 0, page.url.size %}
+            {%- assign aboutPageName = site.pages.about | default: 'about' %}
+            {%- assign aboutPagePath = "/" | append: aboutPageName | append: "/" %}
+            <li><a {% if thisPagePath == aboutPagePath -%} disabled {%- else -%} href="{{ aboutPagePath }}" {%- endif %} class="button">About</a></li>
+            {%- endunless %}
+        </ul>
+        {%- endunless %}
+    </section>
+
+    <section>
         {%- if site.sidebar.defaultLinks %}
             {%- if include.links %}
                 {%- assign links=site.sidebar.defaultLinks | concat: include.links %}
