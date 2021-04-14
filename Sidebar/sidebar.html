@@ -50,11 +50,11 @@
         <ul>
             {%- for link in links %}
             <li><a href="{{ link.url }}" class="button image-button">
-                {%- if link.materialIcon -%}
-                <i class="material-icons {%- if link.materialIconVariant -%} - {{- link.materialIconVariant -}} {%- endif -%}">{{ link.materialIcon }}</i>
-                {%- elsif link.fontAwesomeIcon -%}
-                <i class="{{ link.fontAwesomeIcon }}"></i>
-                {%- endif -%}
+                {%- include Neon-Jekyll-Components/Icons/icon.html
+                    materialIcon = link.materialIcon
+                    materialIconVariant = link.materialIconVariant
+                    fontAwesomeIcon = link.fontAwesomeIcon
+                    -%}
                 <span>{{ link.text }}</span></a></li>
             {%- endfor %}
         </ul>

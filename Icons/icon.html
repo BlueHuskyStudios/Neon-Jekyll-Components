@@ -1,0 +1,6 @@
+
+    {%- if include.materialIcon -%}
+    <i class="material-icons {%- if include.materialIconVariant -%} - {{- include.materialIconVariant -}} {%- endif -%}">{{ include.materialIcon }}</i>
+    {%- elsif include.fontAwesomeIcon -%}
+    <i class="{{ include.fontAwesomeIcon }}"></i>
+    {%- endif -%}
