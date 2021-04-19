@@ -29,6 +29,39 @@
 
     {%- if right-buttons and right-buttons.size > 0 %}
     {%- for button in right-buttons %}
+
+    {%- if button.menu %}
+    <section id="menu" class="shows-child-on-hover hidden" tabindex="-1">
+
+        <button class="image-button">
+            {%- include Neon-Jekyll-Components/Icons/icon.html
+                materialIcon = button.materialIcon
+                materialIconVariant = button.materialIconVariant
+                fontAwesomeIcon = button.fontAwesomeIcon
+                -%}
+        </button>
+
+        <aside class="context-menu shown-on-parent-hover requires-js">
+            {%- if button.menu.items and button.menu.items.size > 0 %}
+            <ol class="plain"
+                data-show-approach="{{ button.menu.show-approach | default: 'unfurl-down' }}"
+                data-context-menu-item-has-top-context-edge>
+                {%- for item in button.menu.items %}
+                <li><label class="context-menu-item   flex-row flex-horiz-space-between flex-vert-center">{{ item.content }}</label></li>
+                {%- endfor %}
+            </ol>
+            {%- endif %}
+
+            {%- if button.menu.contentInclude %}
+            {%- include {{ button.menu.contentInclude }} %}
+            {%- endif %}
+        </aside>
+    </section>
+    <script>
+    $("#menu").removeClass("hidden")
+    </script>
+
+    {%- else %}
     <a href="{{ button.href }}" class="flat button   {{ button.classNames }}" onclick="{{ button.onClick | default: 'return false;' }}">
         {%- include Neon-Jekyll-Components/Icons/icon.html
             materialIcon = button.materialIcon
@@ -36,6 +69,7 @@
             fontAwesomeIcon = button.fontAwesomeIcon
             -%}
     </a>
+    {%- endif %}
     {%- endfor %}
     {%- else %}
     <span class="layout-placeholder"></span>
