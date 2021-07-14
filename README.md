@@ -117,9 +117,9 @@ sidebar:
     </td>
 </tr>
 <tr>
-    <td> _optional_ <hr/> 👇🏽 `headerImage_url` <br/> 🌐 `headerImage.url` </td><td> The URL to the image to display in the sidebar's header. If excluded, then `emptyHeader` must be specified.</td>
+    <td> _optional_ <hr/> 👇🏽 `headerImage_url` <br/> 🌐 `headerImage.url` </td><td> The URL to the image to display in the sidebar's header. If excluded, then `site.author.avatar` will be used. If that configuration isn't set, then `emptyHeader` must be specified.</td>
     <td>
-- Excluded or `false`: The header image is not displayed. If `emptyHeader` is not `true`, then an error message is displayed instead.
+- Excluded or `false`: The header image is the author's avatar, or is not displayed. If `emptyHeader` is not `true`, then an error message is displayed instead, to ensure that this is on-purpose.
 - Any string:          The URL to the header image
 
     </td>
@@ -130,6 +130,24 @@ sidebar:
 
 - Excluded or `false`: No additional classname is applied to the HTML element representing the header image
 - Any string:          The given string is blindly inserted into the HTML element's `class` attribute
+
+    </td>
+</tr>
+<tr>
+    <td> _optional_ <hr/> 👇🏽🌐 `excludeHomepageLink` </td><td> Whether to exclude the homepage link from the sidebar. </td>
+    <td>
+
+- Excluded or `false`: The link will appear. When the user is on the homepage (`/`), this link still appears but is disabled
+- `true`:              The link is not displayed at all
+
+    </td>
+</tr>
+<tr>
+    <td> _optional_ <hr/> 👇🏽🌐 `excludeAboutLink` </td><td> Whether to exclude the about page link from the sidebar. The name of the about page is specified in the site config as `pages.about`; if that's not specified, it's assumed to be `about`, with the path `/about/`. </td>
+    <td>
+
+- Excluded or `false`: The link will appear. When the user is on the about (e.g. `/about/`), this link still appears but is disabled
+- `true`:              The link is not displayed at all
 
     </td>
 </tr>

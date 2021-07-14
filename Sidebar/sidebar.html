@@ -1,12 +1,12 @@
 
-<nav class="sidebar   flex-column flex-vert-space-between">
+<nav class="sidebar   flex-column flex-vert-space-between{%- if include.class %} {{ include.class }} {%- endif -%}">
     <section>
         {%- unless include.emptyHeader | default: site.sidebar.emptyHeader %}
         <header>
             <figure>
-                {%- assign headerImageUrl = include.headerImage_url | default: site.sidebar.headerImage.url %}
+                {%- assign headerImageUrl = include.headerImage_url | default: site.sidebar.headerImage.url | default: site.author.avatar %}
                 {%- if headerImageUrl -%}
-                <img src="{{ headerImageUrl }}" class="{{ include.headerImage_htmlClassNames | default: site.sidebar.headerImage.htmlClassNames }}"/>
+                {% unless page.url == "/" -%} <a href="/"> {%- endunless %}<img src="{{ headerImageUrl }}" class="{{ include.headerImage_htmlClassNames | default: site.sidebar.headerImage.htmlClassNames }}"/></a>
                 {%- else -%}
                 No header image supplied; <code>headerImage_url</code> and <code>site.sidebar.headerImage.url</code> were missing and <code>emptyHeader</code> nor <code>site.sidebar.emptyHeader</code> were not <code>true</code>
                 {%- endif -%}
@@ -14,6 +14,26 @@
         </header>
         {%- endunless %}
 
+        {% assign excludeHomepageLink = include.excludeHomepageLink | default: site.sidebar.excludeHomepageLink %}
+        {% assign excludeAboutLink = include.excludeAboutLink | default: site.sidebar.excludeAboutLink %}
+
+        {%- unless excludeHomepageLink and excludeAboutLink %}
+        <ul>
+            {%- unless excludeHomepageLink %}
+            <li><a {% if page.url == "/" -%} disabled {%- else -%} href="/" {%- endif %} class="button">{{ site.title }}</a></li>
+            {%- endunless %}
+
+            {%- unless excludeAboutLink %}
+            {%- assign thisPagePath = page.url | slice: 0, page.url.size %}
+            {%- assign aboutPageName = site.pages.about | default: 'about' %}
+            {%- assign aboutPagePath = "/" | append: aboutPageName | append: "/" %}
+            <li><a {% if thisPagePath == aboutPagePath -%} disabled {%- else -%} href="{{ aboutPagePath }}" {%- endif %} class="button">About</a></li>
+            {%- endunless %}
+        </ul>
+        {%- endunless %}
+    </section>
+
+    <section>
         {%- if site.sidebar.defaultLinks %}
             {%- if include.links %}
                 {%- assign links=site.sidebar.defaultLinks | concat: include.links %}
@@ -30,11 +50,11 @@
         <ul>
             {%- for link in links %}
             <li><a href="{{ link.url }}" class="button image-button">
-                {%- if link.materialIcon -%}
-                <i class="material-icons">{{ link.materialIcon }}</i>
-                {%- elsif link.fontAwesomeIcon -%}
-                <i class="{{ link.fontAwesomeIcon }}"></i>
-                {%- endif -%}
+                {%- include Neon-Jekyll-Components/Icons/icon.html
+                    materialIcon = link.materialIcon
+                    materialIconVariant = link.materialIconVariant
+                    fontAwesomeIcon = link.fontAwesomeIcon
+                    -%}
                 <span>{{ link.text }}</span></a></li>
             {%- endfor %}
         </ul>

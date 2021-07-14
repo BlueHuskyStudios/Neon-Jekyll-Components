@@ -1,6 +1,22 @@
 <header class="app-bar">
     {%- assign navigation-back = include.navigation-back | default: page.navigation-back %}
     {%- assign subtitle = include.subtitle | default: page.subtitle %}
+
+    {%- assign right-buttons = "" | split: "" %}
+    {%- if page.app-bar.right-buttons %}
+        {%- assign right-buttons = right-buttons | concat: page.app-bar.right-buttons %}
+    {%- endif %}
+    {%- if layout.app-bar.right-buttons %}
+        {%- assign right-buttons = right-buttons | concat: layout.app-bar.right-buttons %}
+    {%- endif %}
+    {%- if include.right-buttons %}
+        {%- assign right-buttons = right-buttons | concat: include.right-buttons %}
+    {%- endif %}
+    {%- if site.app-bar.right-buttons %}
+        {%- assign right-buttons = right-buttons | concat: site.app-bar.right-buttons %}
+    {%- endif %}
+
+
     {%- if navigation-back %}
     <a href="{{ navigation-back | replace: true, '/' }}" {%- if navigation-back == "true" %} onclick="window.history.back(); return false;" {%- endif %} class="flat button   back-to-root-link"><i class="material-icons    back-to-root-icon   invisible">arrow_back</i>
         <h1 class="title"><span class="title-text">{{ include.title | default: page.title }}</span>
@@ -9,5 +25,53 @@
     <a href="#" class="flat button show-sidebar-button" onclick="return false;"><i class="material-icons">menu</i></a>
     <a href="/" class="flat button   back-to-root-link"><h1 class="title"><span class="title-text">{{ include.title | default: page.title }}</span>{% if subtitle %}<span class="subtitle-text">{{ subtitle }}</span>{% endif %}</h1></a>
     {%- endif %}
+
+
+    {%- if right-buttons and right-buttons.size > 0 %}
+    {%- for button in right-buttons %}
+
+    {%- if button.menu %}
+    <section id="menu" class="shows-child-on-hover hidden" tabindex="-1">
+
+        <button class="image-button">
+            {%- include Neon-Jekyll-Components/Icons/icon.html
+                materialIcon = button.materialIcon
+                materialIconVariant = button.materialIconVariant
+                fontAwesomeIcon = button.fontAwesomeIcon
+                -%}
+        </button>
+
+        <aside class="context-menu shown-on-parent-hover requires-js">
+            {%- if button.menu.items and button.menu.items.size > 0 %}
+            <ol class="plain"
+                data-show-approach="{{ button.menu.show-approach | default: 'unfurl-down' }}"
+                data-context-menu-item-has-top-context-edge>
+                {%- for item in button.menu.items %}
+                <li><label class="context-menu-item   flex-row flex-horiz-space-between flex-vert-center">{{ item.content }}</label></li>
+                {%- endfor %}
+            </ol>
+            {%- endif %}
+
+            {%- if button.menu.contentInclude %}
+            {%- include {{ button.menu.contentInclude }} %}
+            {%- endif %}
+        </aside>
+    </section>
+    <script>
+    $("#menu").removeClass("hidden")
+    </script>
+
+    {%- else %}
+    <a href="{{ button.href }}" class="flat button   {{ button.classNames }}" onclick="{{ button.onClick | default: 'return false;' }}">
+        {%- include Neon-Jekyll-Components/Icons/icon.html
+            materialIcon = button.materialIcon
+            materialIconVariant = button.materialIconVariant
+            fontAwesomeIcon = button.fontAwesomeIcon
+            -%}
+    </a>
+    {%- endif %}
+    {%- endfor %}
+    {%- else %}
     <span class="layout-placeholder"></span>
+    {%- endif %}
 </header>
