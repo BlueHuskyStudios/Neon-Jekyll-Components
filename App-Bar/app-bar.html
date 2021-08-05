@@ -1,4 +1,6 @@
-<header class="app-bar">
+{%- assign position = include.position | default: page.app-bar.position | default: site.app-bar.position | default: layout.app-bar.position %}
+
+<header class="app-bar {%- if position %} app-bar-position-{{ position }} {%- endif -%}">
     {%- assign navigation-back = include.navigation-back | default: page.navigation-back %}
     {%- assign subtitle = include.subtitle | default: page.subtitle %}
 
