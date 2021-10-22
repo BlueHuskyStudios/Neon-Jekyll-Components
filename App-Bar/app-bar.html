@@ -1,3 +1,4 @@
+
 <header class="app-bar">
     {%- assign navigation-back = include.navigation-back | default: page.navigation-back %}
     {%- assign subtitle = include.subtitle | default: page.subtitle %}
@@ -31,15 +32,15 @@
     {%- for button in right-buttons %}
 
     {%- if button.menu %}
-    <section id="menu" class="shows-child-on-hover hidden" tabindex="-1">
+    <section id="menu" class="shows-child-on-hover hidden" tabindex="-1" role="button">
 
-        <button class="image-button">
+        <div class="image-button" role="button">
             {%- include Neon-Jekyll-Components/Icons/icon.html
                 materialIcon = button.materialIcon
                 materialIconVariant = button.materialIconVariant
                 fontAwesomeIcon = button.fontAwesomeIcon
                 -%}
-        </button>
+        </div>
 
         <aside class="context-menu shown-on-parent-hover requires-js">
             {%- if button.menu.items and button.menu.items.size > 0 %}
