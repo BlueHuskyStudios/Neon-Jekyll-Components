@@ -67,6 +67,24 @@
     </section>
     {%- endfor %}
 
+    {%- assign customThemes = "" | split: "," | compact %}
+
+    {%- if site.custom-themes %}
+    {%- assign customThemes = customThemes | concat: site.custom-themes %}
+    {%- endif %}
+
+    {%- if include.custom-themes %}
+    {%- assign customThemes = customThemes | append: include.custom-themes %}
+    {%- endif %}
+
+    {%- if layout.custom-themes %}
+    {%- assign customThemes = customThemes | concat: layout.custom-themes %}
+    {%- endif %}
+
+    {%- if page.custom-themes %}
+    {%- assign customThemes = customThemes | concat: page.custom-themes %}
+    {%- endif %}
+
     <section>
         <ul class="theme-color-selection-list">
             <li><a href="#Brightness-Dark"  onclick="return false" title="Dark"  class="color-swatch" theme-swatch-type="brightness" theme-swatch-value="dark" >Dark</a></li>
@@ -78,6 +96,10 @@
             <li><a href="#Theme-Fire"  onclick="return false" title="Fire"  class="color-swatch" theme-swatch-type="color" theme-swatch-value="fire" >Fire</a></li>
             <li><a href="#Theme-Air"   onclick="return false" title="Air"   class="color-swatch" theme-swatch-type="color" theme-swatch-value="air"  >Air</a></li>
        <!-- <li><a href="#Theme-Magic" onclick="return false" title="Magic" class="color-swatch" theme-swatch-type="color" theme-swatch-value="magic">Magic</a></li> -->
+
+            {% for theme in customThemes %}
+            <li><a href="#Theme-{{ theme.single-word-name }}" onclick="return false" title="{{ theme.single-word-name }}" class="color-swatch" theme-swatch-type="color" theme-swatch-value="{{ theme.id | default: theme.single-word-name }}">{{ theme.single-word-name }}</a></li>
+            {% endfor %}
         </ul>
     </section>
 </nav>

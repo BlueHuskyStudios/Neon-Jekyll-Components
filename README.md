@@ -172,6 +172,18 @@ sidebar:
 
     </td>
 </tr>
+<tr>
+    <td> _optional_ <hr/> 📄🌐 `custom-themes` </td><td> Any additional color themes to place in the sidebar's theme selector.
+    <td>
+
+- Excluded or `false`: No additional themes are listed in the sidebar
+- Array of objects:    Any custom themes to list in the sidebar
+    - `single-word-name`: One word to name this theme, like `Air`, `Magic`, or `Halloween`
+    - `id`: _optional_  An ID string which uniquely identifies this theme, for JS to switch to it. Defaults to the value for `single-word-name`.
+    - `stylesheet-url`: The URL to the stylesheet. This isn't technically part of the sidebar, but is passed to the header stylesheet list generator
+
+    </td>
+</tr>
 </tbody>
 </table>
 
