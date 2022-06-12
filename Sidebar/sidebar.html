@@ -1,5 +1,14 @@
 
-<nav class="sidebar   flex-column flex-vert-space-between{%- if include.class %} {{ include.class }} {%- endif -%}">
+{%- assign position=include.position
+    | default: page.sidebar.position   | default: page.nav-drawer.position
+    | default: layout.sidebar.position | default: layout.nav-drawer.position
+    | default: site.sidebar.position   | default: site.nav-drawer.position %}
+
+{%- assign bottom=position == "bottom" %}
+
+
+
+<nav class="sidebar {%- if bottom -%} bottom {%- endif %}   flex-column flex-vert-space-between {%- if include.class %} {{ include.class }} {%- endif -%}">
     <section>
         {%- unless include.emptyHeader | default: site.sidebar.emptyHeader %}
         <header>
