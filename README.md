@@ -316,7 +316,7 @@ A "gallery" which only highlights one single item.
 
 ### Single-Item Highlight (Custom) ##
 `Galleries/single-item-highlight-custom-start.html` and `Galleries/single-item-highlight-custom-end.html`
-A "gallery" which only highlights one single item, and allows you to place anything at all in the gallery (for example, [a YouTube video](https://recipes.benleggiero.me/Fried-Chicken/#ytplayer-assemblyLine)).
+A "gallery" which only highlights one single item, and allows you to place anything at all in the gallery (for example, [a YouTube video](https://Recipes.KyLeggiero.me/Fried-Chicken/#ytplayer-assemblyLine)).
 
 This requires you include the `start`, then place your custom content, then include the `end`.
 
