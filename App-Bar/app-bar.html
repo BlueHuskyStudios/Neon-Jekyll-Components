@@ -15,6 +15,7 @@
     {%- if site.app-bar.right-buttons %}
         {%- assign right-buttons = right-buttons | concat: site.app-bar.right-buttons %}
     {%- endif %}
+    {%- assign exclude-sidebar = page.sidebar.exclude | default: site.sidebar.exclude | default: layout.sidebar.exclude -%}
 
 
     {%- if navigation-back %}
@@ -22,8 +23,12 @@
         <h1 class="title"><span class="title-text">{{ include.title | default: page.title }}</span>
             {%- if subtitle -%} <span class="subtitle-text">{{ subtitle }}</span>{% endif %}</h1></a>
     {%- else %}
+    {%- if exclude-sidebar %}
+    <div class="app-bar-empty-leading-placeholder"></div>
+    {%- else %}
     <a href="#" class="flat button show-sidebar-button" onclick="return false;"><i class="material-icons">menu</i></a>
     <a href="/" class="flat button   back-to-root-link"><h1 class="title"><span class="title-text">{{ include.title | default: page.title }}</span>{% if subtitle %}<span class="subtitle-text">{{ subtitle }}</span>{% endif %}</h1></a>
+    {%- endif %}
     {%- endif %}
 
 
