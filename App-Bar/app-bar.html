@@ -67,7 +67,7 @@
     </script>
 
     {%- else %}
-    <a href="{{ button.href }}" class="flat button   {{ button.classNames }}" onclick="{{ button.onClick | default: 'return false;' }}">
+    <a href="{{ button.href }}" class="flat button   {{ button.classNames }}" {%- if button.onClick %} onclick="{{ button.onClick  }}" {%- endif %}>
         {%- include Neon-Jekyll-Components/Icons/icon.html
             materialIcon = button.materialIcon
             materialIconVariant = button.materialIconVariant
