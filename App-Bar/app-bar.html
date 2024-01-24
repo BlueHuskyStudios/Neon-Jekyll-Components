@@ -67,12 +67,17 @@
     </script>
 
     {%- else %}
-    <a href="{{ button.href }}" class="flat button   {{ button.classNames }}" {%- if button.onClick %} onclick="{{ button.onClick  }}" {%- endif %}>
+    <a href="{{ button.href }}" class="{% if button.raised -%} raised {% else -%} flat {% endif -%} button   {{ button.classNames }}" {%- if button.onClick %} onclick="{{ button.onClick  }}" {%- endif %}>
+        {%- if button.materialIcon or button.materialIconVariant or button.fontAwesomeIcon -%}
         {%- include Neon-Jekyll-Components/Icons/icon.html
             materialIcon = button.materialIcon
             materialIconVariant = button.materialIconVariant
             fontAwesomeIcon = button.fontAwesomeIcon
             -%}
+        {%- endif -%}
+        {%- if button.text -%}
+        <span>{{ button.text }}</span>
+        {%- endif -%}
     </a>
     {%- endif %}
     {%- endfor %}
