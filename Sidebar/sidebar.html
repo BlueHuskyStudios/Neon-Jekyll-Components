@@ -14,8 +14,24 @@
         <header>
             <figure>
                 {%- assign headerImageUrl = include.headerImage_url | default: site.sidebar.headerImage.url | default: site.author.avatar %}
+                {%- assign headerPicture = include.headerImage_picture | default: site.sidebar.headerImage.picture %}
                 {%- if headerImageUrl -%}
-                {% unless page.url == "/" -%} <a href="/"> {%- endunless %}<img src="{{ headerImageUrl }}" class="{{ include.headerImage_htmlClassNames | default: site.sidebar.headerImage.htmlClassNames }}"/></a>
+                {% unless page.url == "/" -%} <a href="/"> {%- endunless %}<img src="{{ headerImageUrl }}" class="{{ include.headerImage_htmlClassNames | default: site.sidebar.headerImage.htmlClassNames }}"/> {%- unless page.url == "/" -%} </a> {%- endunless %}
+                {%- elsif headerPicture %}
+                {% unless page.url == "/" -%} <a href="/"> {%- endunless -%}
+                    <picture>
+                        {% for source in headerPicture.sources %}
+                        {%- if forloop.last %}
+                        <img src="{{ source.url | default: source }}" alt="{{ headerPicture.alt }}" class="{{ source.htmlClassNames }} {{ include.headerImage_htmlClassNames | default: site.sidebar.headerImage.htmlClassNames }}" />
+                        {%- else %}
+                        <source srcset="{{ source.url | default: source }}"
+                            {%- if source.type %} type="{{ source.type }}" {%- endif %}
+                            {%- if source.media %} media="{{ source.media }}" {%- endif %}
+                            class="{{ source.htmlClassNames }} {{ include.headerImage_htmlClassNames | default: site.sidebar.headerImage.htmlClassNames }}" />
+                        {%- endif %}
+                        {%- endfor %}
+                    </picture>
+                {%- unless page.url == "/" -%} </a> {%- endunless %}
                 {%- else -%}
                 No header image supplied; <code>headerImage_url</code> and <code>site.sidebar.headerImage.url</code> were missing and <code>emptyHeader</code> nor <code>site.sidebar.emptyHeader</code> were not <code>true</code>
                 {%- endif -%}
