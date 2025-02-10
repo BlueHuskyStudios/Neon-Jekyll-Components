@@ -49,10 +49,22 @@
             {%- endunless %}
 
             {%- unless excludeAboutLink %}
-            {%- assign thisPagePath = page.url | slice: 0, page.url.size %}
-            {%- assign aboutPageName = site.pages.about | default: 'about' %}
-            {%- assign aboutPagePath = "/" | append: aboutPageName | append: "/" %}
-            <li><a {% if thisPagePath == aboutPagePath -%} disabled {%- else -%} href="{{ aboutPagePath }}" {%- endif %} class="button">About</a></li>
+                {%- assign thisPagePath = page.url | slice: 0, page.url.size %}
+                
+                {%- assign aboutPageName = site.commonPages.about | default: 'about' %}
+                
+                {%- assign aboutPagePath = "/" | append: aboutPageName %}
+                
+                {%- assign aboutPagePathWithSlash = aboutPagePath | append: "/" %}
+                
+                {%- if thisPagePath == aboutPagePath -%}
+                    {%- assign currentPageIsAboutPage = true -%}
+                {%- endif -%}
+                {%- if thisPagePath == aboutPagePathWithSlash -%}
+                    {%- assign currentPageIsAboutPage = true -%}
+                {%- endif %}
+                
+            <li><a {% if currentPageIsAboutPage -%} disabled {%- else -%} href="{{ aboutPagePath }}" {%- endif %} class="button">{{ site.sidebar.aboutLink.label | default: "About" }}</a></li>
             {%- endunless %}
         </ul>
         {%- endunless %}

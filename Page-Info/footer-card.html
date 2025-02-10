@@ -1,12 +1,14 @@
 
 <footer class="page-info card">
+    {%- if page.categories %}
     <ol class="chips   plain   flex-row flex-wrap flex-horiz-center flex-vert-center">
         {% for category in page.categories %}
         <li><span class="chip" disabled data-category-name="{{ category }}">{{ category }}</span></li>
         {% endfor %}
     </ol>
-
-    <ol class="dates-and-times">
+    {%- endif %}
+    
+    <ol class="dates-and-times   plain">
         <li>
             <time class="date" datetime="{{ page.date | date_to_xmlschema }}">
                 <span>{% if page.date-migrated or page.date-edit %}Originally posted{% else %}Posted{% endif %}</span> {{ page.date | date: "%F <span>(a %A)</span> at <span>%R %Z</span>" }}
@@ -27,7 +29,7 @@
         </li>
         {% endif %}
     </ol>
-
+    
     <footer class="oss-links">
         {% if page.original-url %}
         <a href="{{ page.original-url }}" title="View Original" target="_blank" class="low-emphasis button"><i class="material-icons">import_contacts</i> <span>View Original</span></a>
