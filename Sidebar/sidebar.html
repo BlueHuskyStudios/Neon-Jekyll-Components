@@ -24,7 +24,7 @@
                         {%- if forloop.last %}
                         <img src="{{ source.url | default: source }}" alt="{{ headerPicture.alt }}" class="{{ source.htmlClassNames }} {{ include.headerImage_htmlClassNames | default: site.sidebar.headerImage.htmlClassNames }}" />
                         {%- else %}
-                        <source srcset="{{ source.url | default: source }}"
+                        <source srcset="{{ source.url | default: source | relative_url }}"
                             {%- if source.type %} type="{{ source.type }}" {%- endif %}
                             {%- if source.media %} media="{{ source.media }}" {%- endif %}
                             class="{{ source.htmlClassNames }} {{ include.headerImage_htmlClassNames | default: site.sidebar.headerImage.htmlClassNames }}" />
