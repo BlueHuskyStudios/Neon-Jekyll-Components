@@ -34,11 +34,20 @@
         {% if page.original-url %}
         <a href="{{ page.original-url }}" title="View Original" target="_blank" class="low-emphasis button"><i class="material-icons">import_contacts</i> <span>View Original</span></a>
         {% endif %}
-        {%- if site.github %}
-        {%- assign repo = site.github.username | append: "/" | append: site.github.repoName %}
-        {%- assign productionBranchName = site.github.productionBranchName | default: "production" %}
-        <a href="https://github.com/{{ repo }}/commits/{{ productionBranchName }}/{{ page.path }}" title="Post History" target="_blank" class="low-emphasis button"><i class="material-icons">history</i> <span>History</span></a>
-        <a href="https://github.com/{{ repo }}/edit/{{ productionBranchName }}/{{ page.path }}" title="Suggest an Edit" target="_blank" class="low-emphasis button"><i class="material-icons">edit</i> <span>Suggest an Edit</span></a>
+        
+        {%- assign repoUrl = site.source-code.url | default: site.github.repository_url %}
+        {%- if repoUrl %}
+            {%- assign productionBranchName = site.source-code.productionBranchName | default: site.github.environment | default: "production" %}
+            
+            {%- assign historySubpathPrefix = site.source-code.eachPage.historySubpathPrefix %}
+            {%- if historySubpathPrefix %}
+        <a href="{{ repoUrl }}/{{ historySubpathPrefix }}/{{ productionBranchName }}/{{ page.path }}" title="Post History" target="_blank" class="low-emphasis button"><i class="material-icons">history</i> <span>History</span></a>
+            {%- endif %}
+            
+            {%- assign editSubpathPrefix = site.source-code.eachPage.editSubpathPrefix %}
+            {%- if editSubpathPrefix %}
+        <a href="{{ repoUrl }}/{{ editSubpathPrefix }}/{{ productionBranchName }}/{{ page.path }}" title="Suggest an Edit" target="_blank" class="low-emphasis button"><i class="material-icons">edit</i> <span>Suggest an Edit</span></a>
+            {%- endif %}
         {%- endif %}
     </footer>
 </footer>
