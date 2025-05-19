@@ -51,7 +51,7 @@
             {%- unless excludeAboutLink %}
                 {%- assign thisPagePath = page.url | slice: 0, page.url.size %}
                 
-                {%- assign aboutPageName = site.commonPages.about | default: 'about' %}
+                {%- assign aboutPageName = site.commonPages.about | default: site.sidebar.aboutLink.url | default: 'about' %}
                 
                 {%- assign aboutPagePath = "/" | append: aboutPageName %}
                 
