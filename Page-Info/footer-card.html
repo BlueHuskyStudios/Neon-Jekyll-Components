@@ -1,5 +1,25 @@
+{%- assign authors = page.authors %}
+{%- if authors.size <= 0 %}
+    {%- assign authors = page.author | split: "," %}
+{%- endif %}
+
 
 <footer class="page-info card">
+    {%- if authors %}
+    <section class="authors">
+        {%- if authors.size == 1 %}
+        <p>Written by {{ authors[0] }}</p>
+        {%- else %}
+        <h4>Written by:</h4>
+        <ol class="authors-list   plain inline">
+            {% for author in page.authors %}
+            <li class="author">{{ author }}</li>
+            {% endfor %}
+        </ol>
+        {%- endif %}
+    </section>
+    {%- endif %}
+    
     {%- if page.categories %}
     <ol class="chips   plain   flex-row flex-wrap flex-horiz-center flex-vert-center">
         {% for category in page.categories %}
