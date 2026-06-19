@@ -1,0 +1,13 @@
+{%- assign source=include.source -%}
+
+<li id="Source-{{ forloop.index }}"><cite>
+    {%- if source.authors -%} 
+        {{- source.authors }}
+        {%- if source.year %} ({{ source.year }}) {% endif -%}
+        <a href="{{ source.url }}" target="_blank"><i class="scientific-paper">“{{- source.name }}”</i></a>
+    {%- else -%}
+        <a href="{{ source.url }}" target="_blank">{{- source.name }}</a>
+        {%- if source.year %} ({{ source.year }}) {% endif -%}
+    {% endif %}
+    {%- if source.journal %} <i class="scientific-journal">{{ source.journal }}</i> {% endif -%}
+</cite></li>

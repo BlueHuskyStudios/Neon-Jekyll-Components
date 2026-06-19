@@ -70,4 +70,18 @@
             {%- endif %}
         {%- endif %}
     </footer>
+    
+    {% if page.sources.size > 0 %}
+    <section id="Sources">
+        <h1>Sources</h1>
+
+        <ol class="source-list">
+            {%- for source in page.sources %}
+                {%- include Neon-Jekyll-Components/Page-Info/source-item.html
+                    sources=sources
+                %}
+            {%- endfor %}
+        </ol>
+    </section>
+    {%- endif %}
 </footer>
