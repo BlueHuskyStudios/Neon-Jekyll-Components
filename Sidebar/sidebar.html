@@ -107,9 +107,17 @@
     <section>
         <ul class="theme-color-selection-list">
             <li><a href="#Brightness-Dark"  onclick="return false" title="Dark"  class="color-swatch" theme-swatch-type="brightness" theme-swatch-value="dark" >Dark</a></li>
+       <!-- <li><a href="#Brightness-Auto"  onclick="return false" title="Auto"  class="color-swatch" theme-swatch-type="brightness" theme-swatch-value="auto" >Auto</a></li> -->
             <li><a href="#Brightness-Light" onclick="return false" title="Light" class="color-swatch" theme-swatch-type="brightness" theme-swatch-value="light">Light</a></li>
         </ul>
         <ul class="theme-color-selection-list">
+            {%- for customTheme in site.neon.customThemes %}
+                {%- if customTheme.swatch-value %}
+            <li><a href="#Theme-{{ customTheme.tag }}" onclick="return false" title="{{ customTheme.name }}" class="color-swatch" theme-swatch-type="color" theme-swatch-value="{{ customTheme.swatch-value }}">{{ customTheme.name }}</a></li>
+                {%- else %}
+<!-- ❌ Custom theme missing required field `swatch-value`: {{ customTheme | jsonify }} -->
+                {%- endif %}
+            {%- endfor %}
             <li><a href="#Theme-Water" onclick="return false" title="Water" class="color-swatch" theme-swatch-type="color" theme-swatch-value="water">Water</a></li>
             <li><a href="#Theme-Earth" onclick="return false" title="Earth" class="color-swatch" theme-swatch-type="color" theme-swatch-value="earth">Earth</a></li>
             <li><a href="#Theme-Fire"  onclick="return false" title="Fire"  class="color-swatch" theme-swatch-type="color" theme-swatch-value="fire" >Fire</a></li>
