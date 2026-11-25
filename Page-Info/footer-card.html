@@ -1,5 +1,5 @@
 {%- assign authors = page.authors %}
-{%- if authors.size <= 0 %}
+{%- if nil == authors or authors.size <= 0 %}
     {%- assign authors = page.author | split: "," %}
 {%- endif %}
 
