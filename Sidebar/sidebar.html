@@ -6,6 +6,11 @@
 
 {%- assign bottom=position == "bottom" %}
 
+{%- assign excludeThemeColorPicker=include.excludeThemeColorPicker
+    | default: page.sidebar.excludeThemeColorPicker   | default: page.nav-drawer.excludeThemeColorPicker
+    | default: layout.sidebar.excludeThemeColorPicker | default: layout.nav-drawer.excludeThemeColorPicker
+    | default: site.sidebar.excludeThemeColorPicker   | default: site.nav-drawer.excludeThemeColorPicker %}
+
 
 
 <nav class="sidebar {%- if bottom -%} bottom {%- endif %}   flex-column flex-vert-space-between {%- if include.class %} {{ include.class }} {%- endif -%}">
@@ -110,12 +115,13 @@
        <!-- <li><a href="#Brightness-Auto"  onclick="return false" title="Auto"  class="color-swatch" theme-swatch-type="brightness" theme-swatch-value="auto" >Auto</a></li> -->
             <li><a href="#Brightness-Light" onclick="return false" title="Light" class="color-swatch" theme-swatch-type="brightness" theme-swatch-value="light">Light</a></li>
         </ul>
+        {%- unless excludeThemeColorPicker %}
         <ul class="theme-color-selection-list">
-            {%- for customTheme in site.neon.customThemes %}
-                {%- if customTheme.swatch-value %}
-            <li><a href="#Theme-{{ customTheme.tag }}" onclick="return false" title="{{ customTheme.name }}" class="color-swatch" theme-swatch-type="color" theme-swatch-value="{{ customTheme.swatch-value }}">{{ customTheme.name }}</a></li>
+            {%- for custom-theme in site.custom-themes %}
+                {%- if custom-theme.swatch-value %}
+            <li><a href="#Theme-{{ custom-theme.tag }}" onclick="return false" title="{{ custom-theme.name }}" class="color-swatch" theme-swatch-type="color" theme-swatch-value="{{ custom-theme.swatch-value }}">{{ custom-theme.name }}</a></li>
                 {%- else %}
-<!-- ❌ Custom theme missing required field `swatch-value`: {{ customTheme | jsonify }} -->
+<!-- ❌ Custom theme missing required field `swatch-value`: {{ custom-theme | jsonify }} -->
                 {%- endif %}
             {%- endfor %}
             <li><a href="#Theme-Water" onclick="return false" title="Water" class="color-swatch" theme-swatch-type="color" theme-swatch-value="water">Water</a></li>
@@ -124,5 +130,6 @@
             <li><a href="#Theme-Air"   onclick="return false" title="Air"   class="color-swatch" theme-swatch-type="color" theme-swatch-value="air"  >Air</a></li>
        <!-- <li><a href="#Theme-Magic" onclick="return false" title="Magic" class="color-swatch" theme-swatch-type="color" theme-swatch-value="magic">Magic</a></li> -->
         </ul>
+        {%- endunless %}
     </section>
 </nav>
