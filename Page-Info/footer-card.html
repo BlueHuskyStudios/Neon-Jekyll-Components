@@ -29,11 +29,13 @@
     {%- endif %}
     
     <ol class="dates-and-times   plain">
+        {%- if page.date %}
         <li>
             <time class="date" datetime="{{ page.date | date_to_xmlschema }}">
                 <span>{% if page.date-migrated or page.date-edit %}Originally posted{% else %}Posted{% endif %}</span> {{ page.date | date: "%F <span>(a %A)</span> at <span>%R %Z</span>" }}
             </time>
         </li>
+        {%- endif %}
         {% if page.date-migrated %}
         <li>
             <time class="date" datetime="{{ page.date-migrated | date_to_xmlschema }}">
